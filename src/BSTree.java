@@ -37,11 +37,25 @@ public class BSTree {
             return (1 + size(aTree.getLeft()) + size(aTree.getRight()));
     }
 
-    public int height(Node aTree){
+    public int altura(Node aTree){
         if (aTree == null)
-            return 0;
+            return -1;
         else
-            return (1 + Math.max(height(aTree.getLeft()), height(aTree.getRight())));
+            return (1 + Math.max(altura(aTree.getLeft()), altura(aTree.getRight())));
+    }
+
+    public int alturaEsquerda(Node n){
+        if (n == null)
+            return -1;
+        else
+            return (1 + (altura(n.getLeft())));
+    }
+
+    public int alturaDireita(Node n){
+        if (n == null)
+            return -1;
+        else
+            return (1 + (altura(n.getRight())));
     }
 
     public void preOrder(Node aTree){
@@ -68,34 +82,48 @@ public class BSTree {
         }
     }
 
-    public void insert(int aId, Movies x){
-        Node temp, current, parent;
+    public void inserir(int key, Movies filme){
+        Node noh = new Node(filme, key, null);
         if (getRoot() == null){
-            temp = new Node(x, aId);
-            setRoot(temp);
-            setNoOfNodes(getNoOfNodes()+1);
+            setRoot(noh);
         } else {
-            temp = new Node(x, aId);
-            current = getRoot();
+            Node atual = getRoot();
+            Node parent;
             while (true){
-                parent = current;
-                if (aId < current.getKey()){
-                    current = current.getLeft();
-                    if (current == null){
-                        parent.setLeft(temp);
-                        setNoOfNodes(getNoOfNodes()+1);
+                parent = atual;
+                if (key < atual.getKey()){
+                    atual = atual.getLeft();
+                    if (atual == null){
+                        parent.setLeft(noh);
+                        rebalance(parent);
                         return;
                     }
-                }else {
-                    current = current.getRight();
-                    if (current == null){
-                        parent.setRight(temp);
-                        setNoOfNodes(getNoOfNodes()+1);
+                } else {
+                    atual = atual.getRight();
+                    if (atual == null){
+                        parent.setRight(noh);
+                        rebalance(parent);
                         return;
                     }
                 }
             }
         }
+    }
+
+    public void rebalance(Node noh){
+        int x = alturaDireita(noh);
+        int y = alturaEsquerda(noh);
+        if (x-y == -2){
+        }
+
+    }
+
+    public Node rotateRight(Node a){
+        Node b = a.getLeft();
+        b.setParent(a.getParent());
+        a.setLeft(b.getRight());
+        if (a.getLeft() != null)
+
     }
 
     public Node find(int akey){
