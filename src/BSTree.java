@@ -114,17 +114,12 @@ public class BSTree {
         int x = alturaDireita(noh);
         int y = alturaEsquerda(noh);
         if (x-y == -2){
+            //need to finish
         }
 
     }
 
-    public Node rotateRight(Node a){
-        Node b = a.getLeft();
-        b.setParent(a.getParent());
-        a.setLeft(b.getRight());
-        if (a.getLeft() != null)
-
-    }
+    //public Node rotateRight(Node a){}
 
     public Node find(int akey){
         Node current = null;
