@@ -110,16 +110,25 @@ public class BSTree {
         }
     }
 
-    public void rebalance(Node noh){
-        int x = alturaDireita(noh);
-        int y = alturaEsquerda(noh);
-        if (x-y == -2){
-            //need to finish
+    public void rebalance(Node parent){
+        int x = alturaDireita(parent);
+        int y = alturaEsquerda(parent);
+        int z = x-y;
+        int a = alturaDireita(parent.getParent());
+        int b = alturaEsquerda(parent.getParent());
+        int c = a-b;
+        if (z == -2 && ){
+            rotateRight(parent);
         }
 
     }
 
-    //public Node rotateRight(Node a){}
+    public Node rotateRight(Node a){
+        a.setParent(getRoot());
+        a.setLeft(getRoot().getRight());
+        rebalance(a.getParent());
+
+    }
 
     public Node find(int akey){
         Node current = null;
