@@ -1,3 +1,7 @@
+package Tree;
+
+import TADMovie.*;
+
 public class Node {
     private Movies movie;
     private Node left;

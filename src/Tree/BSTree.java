@@ -1,3 +1,7 @@
+package Tree;
+
+import TADMovie.*;
+
 public class BSTree {
     private Node root;
     private int NoOfNodes;

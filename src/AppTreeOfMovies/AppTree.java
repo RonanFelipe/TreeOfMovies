@@ -40,7 +40,7 @@ public class AppTree {
         Node m16 = new Node(movie16, 12, null);
         Node m17 = new Node(movie17, 11, null);
         Node m18 = new Node(movie18, 16, null);
-        
+
 
     }
 }
