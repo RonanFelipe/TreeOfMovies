@@ -22,24 +22,10 @@ public class AppTree {
         Movies movie16 = new Movies("Black Swan", 2010, 8.0, 108);
         Movies movie17 = new Movies("Ocean's Eleven", 2001, 7.8, 116);
         Movies movie18 = new Movies("V for Vendetta", 2005, 8.2, 132);
-        Node m1 = new Node(movie1, 7, null);
-        Node m2 = new Node(movie2, 8, null);
-        Node m3 = new Node(movie3, 6, null);
-        Node m4 = new Node(movie4, 20, null);
-        Node m5 = new Node(movie5, 17, null);
-        Node m6 = new Node(movie6, 5, null);
-        Node m7 = new Node(movie7, 21, null);
-        Node m8 = new Node(movie8, 15, null);
-        Node m9 = new Node(movie9, 9, null);
-        Node m10 = new Node(movie10, 5, null);
-        Node m11 = new Node(movie11, 18, null);
-        Node m12 = new Node(movie12, 14, null);
-        Node m13 = new Node(movie13, 13, null);
-        Node m14 = new Node(movie14, 4, null);
-        Node m15 = new Node(movie15, 10, null);
-        Node m16 = new Node(movie16, 12, null);
-        Node m17 = new Node(movie17, 11, null);
-        Node m18 = new Node(movie18, 16, null);
+        BSTree tree = new BSTree();
+        tree.inserir(7, movie1);
+        tree.inserir(8, movie2);
+        tree.inserir(6, movie3);
 
 
     }

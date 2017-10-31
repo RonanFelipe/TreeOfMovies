@@ -90,22 +90,27 @@ public class BSTree {
         Node noh = new Node(filme, key, null);
         if (getRoot() == null){
             setRoot(noh);
+            setNoOfNodes(getNoOfNodes() +1);
         } else {
             Node atual = getRoot();
-            Node parent;
+            Node aux;
             while (true){
-                parent = atual;
+                aux = atual;
                 if (key < atual.getKey()){
                     atual = atual.getLeft();
                     if (atual == null){
-                        parent.setLeft(noh);
+                        aux.setLeft(noh);
+                        setNoOfNodes(getNoOfNodes() +1);
+                        noh.setParent(aux);
                         rebalance(noh.getParent());
                         return;
                     }
                 } else {
                     atual = atual.getRight();
                     if (atual == null){
-                        parent.setRight(noh);
+                        aux.setRight(noh);
+                        setNoOfNodes(getNoOfNodes() +1);
+                        noh.setParent(aux);
                         rebalance(noh.getParent());
                         return;
                     }
@@ -117,8 +122,10 @@ public class BSTree {
     public void rebalance(Node atual){
         int x = alturaDireita(atual);
         int y = alturaEsquerda(atual);
-        atual.setBalance(x-y);
+        int z = x-y;
+        atual.setBalance(z);
         if (atual.getBalance() == -1 || atual.getBalance() == 1 || atual.getBalance() == 0 ){
+            if (atual.getParent() != null)
             rebalance(atual.getParent());
         } else if (atual.getBalance() < -1 && atual.getLeft().getBalance() < 0){//rotação simples direita
             rotateRight(atual);//Lado Esquerdo da árvore

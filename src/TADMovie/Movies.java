@@ -15,8 +15,8 @@ public class Movies {
 
     public Movies() {
         setFilmeName("Adicionar");
-        setAnoFilme(1);
-        setImdbRating(0.0);
+        setAnoFilme(1950);
+        setImdbRating(4.99);
         setMinutosDuration(0);
     }
 
@@ -42,13 +42,20 @@ public class Movies {
 
     public void setAnoFilme(int anoFilme) {
         if (anoFilme < 1920)
-            this.anoFilme = 1;
+            this.anoFilme = 1950;
+        else if (anoFilme > 2017)
+            this.anoFilme = 1950;
         else
             this.anoFilme = anoFilme;
     }
 
     public void setImdbRating(double imdbRating) {
-        this.imdbRating = imdbRating;
+        if (imdbRating > 9.3)
+            this.imdbRating = 4.99;
+        else if (imdbRating < 3.0)
+            this.imdbRating = 4.99;
+        else
+            this.imdbRating = imdbRating;
     }
 
     public void setMinutosDuration(int minutosDuration) {
