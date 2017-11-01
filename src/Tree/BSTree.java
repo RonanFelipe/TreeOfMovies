@@ -124,57 +124,99 @@ public class BSTree {
         int y = alturaEsquerda(atual);
         int z = x-y;
         atual.setBalance(z);
-        if (atual.getBalance() == -1 || atual.getBalance() == 1 || atual.getBalance() == 0 ){
+        if (atual.getBalance() == -2){
+            if (altura(atual.getLeft().getLeft()) >= altura(atual.getLeft().getRight())){
+                atual = rotateRight(atual);
+            } else {
+                atual = doubleRotationLeftRihgt(atual);
+            }
+        } else if (atual.getBalance() == 2){
+            if (altura(atual.getRight().getRight()) >= altura(atual.getRight().getLeft())){
+                atual = rotateLeft(atual);
+            } else {
+                atual = doubleRotationRightLeft(atual);
+            }
+        }
+        if (atual.getParent() != null){
+            rebalance(atual.getParent());
+        } else {
+            this.root = atual;
+        }
+        /*if (atual.getBalance() == -1 || atual.getBalance() == 1 || atual.getBalance() == 0 ){
             if (atual.getParent() != null)
             rebalance(atual.getParent());
-        } else if (atual.getBalance() < -1 && atual.getLeft().getBalance() < 0){//rotação simples direita
+        } else if (atual.getBalance() < -1 && atual.getLeft() != null && atual.getLeft().getBalance() < 0){//rotação simples direita
             rotateRight(atual);//Lado Esquerdo da árvore
-        } else if (atual.getBalance() > 1 && atual.getLeft().getBalance() > 0){//rotação simples esquerda
+        } else if (atual.getBalance() > 1 && atual.getLeft() != null && atual.getLeft().getBalance() > 0){//rotação simples esquerda
             rotateLeft(atual);//Lado Esquerdo da árvore
-        } else if (atual.getBalance() < -1 && atual.getRight().getBalance() < 0){//rotação simples direita
+        } else if (atual.getBalance() < -1 && atual.getRight() != null && atual.getRight().getBalance() < 0){//rotação simples direita
             rotateRight(atual);//Lado Direito da árvore
-        } else if (atual.getBalance() > 1 && atual.getRight().getBalance() > 0){//rotação simples esquerda
+        } else if (atual.getBalance() > 1 && atual.getRight() != null && atual.getRight().getBalance() > 0){//rotação simples esquerda
             rotateLeft(atual);//Lado Direito da árvore
         } else if (atual.getBalance() < -1 && atual.getLeft().getBalance() > 0){//sinais opostos, rotação dupla
-            rotateLeft(atual.getLeft());//rotação simples no filho positivo - Lado Esqurdo da árvore
-            rotateRight(atual);//rotação oposta no pai
+            doubleRotationLeftRihgt(atual);//rotação simples no filho positivo - Lado Esqurdo da árvore
+            //rotação oposta no pai
         } else if (atual.getBalance() > 1 && atual.getLeft().getBalance() < 0){//sinais opostos, rotação dupla
-            rotateRight(atual.getLeft());//rotação simples no filho negativo - Ladoo Esquerdo da árvore
-            rotateLeft(atual);//rotação oposta no pai
+            doubleRotationRightLeft(atual);//rotação simples no filho negativo - Ladoo Esquerdo da árvore
+            //rotação oposta no pai
         } else if (atual.getBalance() < -1 && atual.getRight().getBalance() > 0){//sinais opostos, rotação dupla
-            rotateLeft(atual.getRight());//rotação simples no filho positivo - Lado Direito da árvore
-            rotateRight(atual);//rotação oposta no pai
+            doubleRotationLeftRihgt(atual);//rotação simples no filho positivo - Lado Direito da árvore
+            //rotação oposta no pai
         } else if (atual.getBalance() > 1 && atual.getRight().getBalance() < 0){//sinais opostos, rotação dupla
-            rotateRight(atual.getRight());//rotação simples no filho negativo - Lado Direiro da árvore
-            rotateLeft(atual);//rotação oposta do pai
+            doubleRotationRightLeft(atual);//rotação simples no filho negativo - Lado Direiro da árvore
+            //rotação oposta do pai
+        }*/
+
+    }
+
+    public Node rotateRight(Node a){
+        Node noh = a.getLeft();
+        noh.setParent(a.getParent());
+        a.setLeft(noh.getRight());
+        if (a.getLeft() != null){
+            a.getLeft().setParent(a);
         }
-
+        noh.setRight(a);
+        a.setParent(noh);
+        if (noh.getParent() != null){
+            if (noh.getParent().getRight() == a){
+                noh.getParent().setRight(noh);
+            } else if (noh.getParent().getLeft() == a){
+                noh.getParent().setLeft(noh);
+            }
+        }
+        return noh;
     }
 
-    public void rotateRight(Node a){
-        Node p;
-        Node q;
-        Node aux;
-        p = a;
-        q = p.getLeft();
-        aux = q.getRight();
-        q.setRight(p);
-        p.setLeft(aux);
-        p = q;
-        //Preciso checar se é preciso algum tipo de retorno
+    public Node rotateLeft(Node a){
+        Node aux = a;
+        Node test = aux;
+        Node noh = a.getRight();
+        noh.setParent(a.getParent());
+        a.setRight(noh.getLeft());
+        if (a.getRight() != null){
+            a.getRight().setParent(a);
+        }
+        noh.setLeft(a);
+        a.setParent(noh);
+        if (noh.getParent() != null){
+            if (noh.getParent().getRight() == a){
+                noh.getParent().setRight(noh);
+            } else if (noh.getParent().getLeft() == a){
+                noh.getParent().setLeft(noh);
+            }
+        }
+        return noh;
     }
 
-    public void rotateLeft(Node a){
-        Node p;
-        Node q;
-        Node aux;
-        p = a;
-        q = p.getRight();
-        aux = q.getLeft();
-        q.setLeft(p);
-        p.setRight(aux);
-        p = q;
-        //Preciso checar se é preciso algum tipo de retorno
+    public Node doubleRotationLeftRihgt(Node a){
+        a.setLeft(rotateLeft(a.getLeft()));
+        return rotateRight(a);
+    }
+
+    public Node doubleRotationRightLeft(Node a){
+        a.setRight(rotateRight(a.getRight()));
+        return rotateLeft(a);
     }
 
     public Node find(int akey){
