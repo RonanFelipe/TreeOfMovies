@@ -23,9 +23,17 @@ public class AppTree {
         Movies movie17 = new Movies("Ocean's Eleven", 2001, 7.8, 116);
         Movies movie18 = new Movies("V for Vendetta", 2005, 8.2, 132);
         BSTree tree = new BSTree();
-        tree.inserir(7, movie1);
-        tree.inserir(8, movie2);
-        tree.inserir(6, movie3);
+        tree.inserir(70, movie1);
+        tree.inserir(80, movie2);
+        tree.inserir(60, movie3);
+        tree.inserir(90, movie4);
+        tree.inserir(100, movie7);
+        tree.inserir(79, movie6);
+        System.out.println("Exibindo pre Ordem");
+        tree.preOrder(tree.getRoot());
+        System.out.println("\nExibindo pós Ordem");
+        tree.postOrder(tree.getRoot());
+
 
 
     }
