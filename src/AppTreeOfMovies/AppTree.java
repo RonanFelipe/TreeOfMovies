@@ -33,6 +33,8 @@ public class AppTree {
         tree.preOrder(tree.getRoot());
         System.out.println("\nExibindo pós Ordem");
         tree.postOrder(tree.getRoot());
+        System.out.println("Mostrando sucessor");
+        System.out.println(tree.getSucessor(tree.getRoot()).getMovie());
 
 
 

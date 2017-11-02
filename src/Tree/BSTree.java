@@ -219,6 +219,30 @@ public class BSTree {
         return rotateLeft(a);
     }
 
+    public void removeNode(int key){
+        if (key == getRoot().getKey()){
+            Node aux = getRoot();
+            Node test = getSucessor(getRoot());
+            if (test.getRight() != null){
+                test.getParent().setLeft(test.getRight());
+                setRoot(test);
+                getRoot().setRight(aux.getRight());
+                getRoot().setLeft(aux.getLeft());
+                rebalance(test.getParent());
+            } else if (test.getRight() == null){
+                setRoot(test);
+                getRoot().setRight(aux.getRight());
+                getRoot().setLeft(aux.getLeft());
+                rebalance(test.getParent());
+            } else {
+                setRoot(test);
+                getRoot().setRight(aux.getRight());
+                getRoot().setLeft(aux.getLeft());
+                rebalance(test.getParent());
+            }
+        }
+    }
+
     public Node find(int akey){
         Node current = null;
         if (!isEmpty()){
@@ -236,7 +260,9 @@ public class BSTree {
     }
 
     public Node getSucessor(Node aNode){
-        Node current, sucessor, sucessorParent;
+        Node current;
+        Node sucessor;
+        Node sucessorParent;
         sucessor = aNode;
         sucessorParent = aNode;
         current = aNode.getRight();
@@ -250,5 +276,7 @@ public class BSTree {
             sucessor.setRight(aNode.getRight());
         }
         return sucessor;
+
     }
+
 }
