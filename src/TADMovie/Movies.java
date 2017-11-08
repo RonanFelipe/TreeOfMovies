@@ -67,7 +67,8 @@ public class Movies {
         return "#Movie Name: " + String.valueOf(getFilmeName()) +
                 " Ano:" + String.valueOf(getAnoFilme()) +
                 " IMDB Rating: " + String.valueOf(getImdbRating()) +
-                " Duration: " + String.valueOf(getMinutosDuration());
+                " Duration: " + String.valueOf(getMinutosDuration()) +
+                " min";
     }
 
 }
