@@ -222,23 +222,35 @@ public class BSTree {
     public void removeNode(int key){
         if (key == getRoot().getKey()){
             Node aux = getRoot();
-            Node test = getSucessor(getRoot());
-            if (test.getRight() != null){
+            Node test = sucessor(getRoot());
+            if (test.getParent() == getRoot()){
+                setRoot(test);
+                getRoot().setParent(null);
+                getRoot().setLeft(aux.getLeft());
+                getRoot().getRight().setParent(getRoot());
+                getRoot().getLeft().setParent(getRoot());
+                setNoOfNodes(getNoOfNodes()-1);
+                rebalance(getRoot());
+            } else if (test.getRight() != null){
                 test.getParent().setLeft(test.getRight());
                 setRoot(test);
+                getRoot().setParent(null);
                 getRoot().setRight(aux.getRight());
                 getRoot().setLeft(aux.getLeft());
-                rebalance(test.getParent());
-            } else if (test.getRight() == null){
-                setRoot(test);
-                getRoot().setRight(aux.getRight());
-                getRoot().setLeft(aux.getLeft());
-                rebalance(test.getParent());
+                getRoot().getRight().setParent(getRoot());
+                getRoot().getLeft().setParent(getRoot());
+                setNoOfNodes(getNoOfNodes()-1);
+                rebalance(test.getRight());
             } else {
+                test.getParent().setLeft(null);
                 setRoot(test);
+                getRoot().setParent(null);
                 getRoot().setRight(aux.getRight());
                 getRoot().setLeft(aux.getLeft());
-                rebalance(test.getParent());
+                getRoot().getRight().setParent(getRoot());
+                getRoot().getLeft().setParent(getRoot());
+                setNoOfNodes(getNoOfNodes()-1);
+                rebalance(test.getRight());//verificar se test parent é null ou não
             }
         }
     }
@@ -259,7 +271,7 @@ public class BSTree {
         return current;
     }
 
-    public Node getSucessor(Node aNode){
+    /*public Node getSucessor(Node aNode){
         Node current;
         Node sucessor;
         Node sucessorParent;
@@ -277,6 +289,27 @@ public class BSTree {
         }
         return sucessor;
 
+    }*/
+
+    public Node getMinimo(Node aNode){
+        while (aNode.getLeft() != null){
+            aNode = aNode.getLeft();
+        }
+        return aNode;
+    }
+
+    public Node getMaximo(Node aNode){
+        while (aNode.getRight() != null){
+            aNode = aNode.getRight();
+        }
+        return aNode;
+    }
+
+    public Node sucessor(Node aNode){
+        if (aNode.getRight() != null)
+            return getMinimo(aNode.getRight());
+        else
+            return null;
     }
 
 }

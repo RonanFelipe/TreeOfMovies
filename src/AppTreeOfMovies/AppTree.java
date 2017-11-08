@@ -22,19 +22,31 @@ public class AppTree {
         Movies movie16 = new Movies("Black Swan", 2010, 8.0, 108);
         Movies movie17 = new Movies("Ocean's Eleven", 2001, 7.8, 116);
         Movies movie18 = new Movies("V for Vendetta", 2005, 8.2, 132);
-        BSTree tree = new BSTree();
-        tree.inserir(70, movie1);
-        tree.inserir(80, movie2);
-        tree.inserir(60, movie3);
-        tree.inserir(90, movie4);
-        tree.inserir(100, movie7);
-        tree.inserir(79, movie6);
+        System.out.println("Iniciando a árvore vazia");
+        BSTree tree = new BSTree(); //Arvore inciada como vazia
+        System.out.println("Inserindo filmes na árvore");
+        tree.inserir(70, movie1); //Public Enemies
+        tree.inserir(80, movie2); //American Gangster
+        tree.inserir(60, movie3); //Pirates of Caribbean
+        tree.inserir(90, movie4); //The Dark Knight
+        tree.inserir(95, movie7); //The Godfather
+        tree.inserir(79, movie6); //Inside Man
+        tree.inserir(85, movie18); //V for Vendetta
+        tree.inserir(87, movie17);//Oceans's Eleven
         System.out.println("Exibindo pre Ordem");
         tree.preOrder(tree.getRoot());
         System.out.println("\nExibindo pós Ordem");
         tree.postOrder(tree.getRoot());
-        System.out.println("Mostrando sucessor");
-        System.out.println(tree.getSucessor(tree.getRoot()).getMovie());
+        System.out.println("\nMostrando sucessor");
+        System.out.println(tree.sucessor(tree.getRoot()).getMovie());
+        System.out.println("\nRemovendo raiz e substituindo raiz pelo seu sucessor");
+        tree.removeNode(80);
+        System.out.println("Exibindo pre Ordem");
+        tree.preOrder(tree.getRoot());
+        System.out.println("\nPesquisando chave 95");
+        System.out.println(tree.find(95).getMovie());
+        System.out.println("\nInformando altura da árvore");
+        System.out.println(tree.altura(tree.getRoot()));
 
 
 
