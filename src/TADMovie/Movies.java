@@ -1,6 +1,8 @@
 package TADMovie;
 
-public class Movies {
+import java.io.Serializable;
+
+public class Movies implements Serializable {
     private String filmeName;
     private int anoFilme;
     private double imdbRating;

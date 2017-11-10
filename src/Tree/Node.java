@@ -2,7 +2,9 @@ package Tree;
 
 import TADMovie.*;
 
-public class Node {
+import java.io.Serializable;
+
+public class Node implements Serializable{
     private Movies movie;
     private Node left;
     private Node right;

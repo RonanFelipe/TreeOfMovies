@@ -2,8 +2,11 @@ package AppTreeOfMovies;
 import TADMovie.*;
 import Tree.*;
 
+import java.io.*;
+import java.util.ArrayList;
+
 public class AppTree {
-    public static void main(String[] args){
+    public static void main(String[] args) throws FileNotFoundException {
         Movies movie1 = new Movies("Public Enemies", 2009, 7.0, 140);
         Movies movie2 = new Movies("American Gangster", 2007, 7.8, 157);
         Movies movie3 = new Movies("Pirates of the Caribbean: Dead Men Tell No Tales", 2017, 6.8, 129);
@@ -40,14 +43,20 @@ public class AppTree {
         System.out.println("\nMostrando sucessor");
         System.out.println(tree.sucessor(tree.getRoot()).getMovie());
         System.out.println("\nRemovendo raiz e substituindo raiz pelo seu sucessor");
-        tree.removeNode(80);
+        tree.removeNode(80);//Removendo raiz, filme American Gangster
         System.out.println("Exibindo pre Ordem");
         tree.preOrder(tree.getRoot());
         System.out.println("\nPesquisando chave 95");
         System.out.println(tree.find(95).getMovie());
         System.out.println("\nInformando altura da árvore");
         System.out.println(tree.altura(tree.getRoot()));
+        System.out.println("Teste criando arquivo");
 
+        try {
+            tree.inOrder(tree.getRoot(), new PrintStream("myTreeFile.txt"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
 
     }
