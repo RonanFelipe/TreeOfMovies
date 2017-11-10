@@ -2,7 +2,10 @@ package Tree;
 
 import TADMovie.*;
 
-public class BSTree {
+import java.io.PrintStream;
+import java.io.Serializable;
+
+public class BSTree implements Serializable {
     private Node root;
     private int NoOfNodes;
 
@@ -70,11 +73,11 @@ public class BSTree {
         }
     }
 
-    public void inOrder(Node aTree){
+    public void inOrder(Node aTree, PrintStream print){
         if (aTree != null){
-            inOrder(aTree.getLeft());
-            System.out.println(aTree.getMovie());
-            inOrder(aTree.getRight());
+            inOrder(aTree.getLeft(), print);
+            print.println(aTree.getMovie());
+            inOrder(aTree.getRight(), print);
         }
     }
 
