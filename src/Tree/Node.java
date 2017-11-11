@@ -1,17 +1,11 @@
 package Tree;
 
+import Abstracts.ABSNode;
 import TADMovie.*;
 
-import java.io.Serializable;
 
-public class Node implements Serializable{
-    private Movies movie;
-    private Node left;
-    private Node right;
-    private Node parent;
-    private int key;
-    private int balance;
-    private int height;
+public class Node extends ABSNode {
+
 
     public Node(Movies movie, int key, Node parent) {
         this.movie = movie;

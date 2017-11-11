@@ -1,13 +1,12 @@
 package Tree;
 
+import Abstracts.AbsBSTree;
 import TADMovie.*;
 
 import java.io.PrintStream;
-import java.io.Serializable;
 
-public class BSTree implements Serializable {
-    private Node root;
-    private int NoOfNodes;
+
+public class BSTree extends AbsBSTree{
 
     public BSTree() {
         this.root = null;
