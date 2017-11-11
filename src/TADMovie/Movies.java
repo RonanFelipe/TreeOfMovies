@@ -1,12 +1,10 @@
 package TADMovie;
 
+import Abstracts.AbsMovies;
+
 import java.io.Serializable;
 
-public class Movies implements Serializable {
-    private String filmeName;
-    private int anoFilme;
-    private double imdbRating;
-    private int minutosDuration;
+public class Movies extends AbsMovies {
 
     public Movies(String filmeName, int anoFilme, double imdbRating, int minutosDuration) {
         setFilmeName(filmeName);
